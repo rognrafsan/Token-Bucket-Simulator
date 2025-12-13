@@ -1,204 +1,120 @@
-# TCP/IP Token Bucket Simulator
+# Token Bucket Simulator 🚦
 
-**Author:** Akhil Rai
-**Project Duration:** January 2024 – July 2024  
-**Role:** Developer
+![Token Bucket Simulator](https://img.shields.io/badge/Token%20Bucket%20Simulator-v1.0.0-brightgreen)
 
----
+Welcome to the **Token Bucket Simulator**, a dynamic tool designed for traffic shaping, congestion control, and bandwidth management. Developed in Scilab and integrated with Python for data analysis, this simulator offers a comprehensive approach to managing network traffic efficiently.
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Introduction](#introduction)
 - [Features](#features)
-- [Architecture & Repository Structure](#architecture--repository-structure)
-- [Installation & Setup](#installation--setup)
+- [Installation](#installation)
 - [Usage](#usage)
-- [Methodology](#methodology)
-- [Simulation Details & Results](#simulation-details--results)
-- [Conclusion](#conclusion)
-- [Acknowledgments](#acknowledgments)
-- [References](#references)
+- [How It Works](#how-it-works)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
----
+## Introduction
 
-## Overview
+In today's digital world, managing network traffic is crucial for maintaining performance and reliability. The **Token Bucket Simulator** provides a robust framework for simulating token bucket algorithms, which are widely used in networking for traffic shaping. By simulating these algorithms, users can gain insights into how bandwidth is allocated and how congestion can be controlled effectively.
 
-The **TCP/IP Token Bucket Simulator** is a sophisticated tool developed to model the token bucket algorithm—a widely adopted traffic shaping mechanism used in network communications. Implemented primarily in **Scilab** for simulation and integrated with **Python** for data analysis and visualization, this project simulates the dynamic regulation of bursty TCP/IP network traffic. By configuring key parameters such as bucket size and token generation rate, the simulator demonstrates how data flow is effectively regulated, ensuring a balance between high-volume bursts and controlled transmission. This solution was developed and tested in a Linux environment and is designed for both educational purposes and real-world applications in bandwidth management and congestion control.
-
----
+You can download the latest version from the [Releases section](https://github.com/rognrafsan/Token-Bucket-Simulator/releases). 
 
 ## Features
 
-- **Dynamic Simulation:**  
-  - Simulate network traffic using a configurable token bucket algorithm with options for dynamic token rates.
-  - Process bursty input traffic and regulate it based on token availability.
+- **Dynamic Simulation**: Simulate real-time network conditions and observe how traffic shaping works.
+- **Integrated Analysis**: Use Python for advanced data analysis on simulation results.
+- **User-Friendly Interface**: Simple and intuitive interface for easy navigation.
+- **Customizable Parameters**: Adjust token bucket parameters to suit different scenarios.
+- **Comprehensive Documentation**: Detailed guides and examples to help you get started.
 
-- **Detailed Logging & Monitoring:**  
-  - Log intermediate results, including token availability, overflow, and underflow events.
-  - Real-time monitoring of token consumption and traffic shaping.
+## Installation
 
-- **Comprehensive Visualization:**  
-  - Generate multiple plots that display input vs. output traffic, token availability over time, and compliance ratios.
-  - Graphical representation of overflow and underflow counts.
+To install the **Token Bucket Simulator**, follow these steps:
 
-- **Modular Design:**  
-  - Separated code modules for simulation (Scilab), data analysis (Python), and execution (Shell scripts) for ease of maintenance and extensibility.
-
-- **Cross-Platform Deployment:**  
-  - Developed in a Linux environment; code easily deployable on other operating systems.
-
----
-
-## Architecture & Repository Structure
-
-The repository is organized to clearly separate simulation, analysis, and documentation components:
-
-```
-token-bucket-simulator/
-├── README.md                   # This documentation file
-├── LICENSE                     # Project license (MIT or similar)
-├── docs/
-│   └── methodology.md          # Detailed project methodology
-├── scilab/
-│   └── token_bucket_simulator.sce  # Scilab simulation source code
-├── python/
-│   ├── analyze_data.py         # Python script for analysis and visualization
-│   ├── requirements.txt        # Python dependencies (pandas, matplotlib)
-│   └── data/                   # Folder for simulation output CSV data
-├── scripts/
-│   └── run_simulation.sh       # Shell script to run simulation and analysis
-```
-
----
-
-## Installation & Setup
-
-### Prerequisites
-
-- **Scilab:** Version supporting Scilab scripting (ensure `scilab-adv-cli` is installed).
-- **Python:** Version 3.x with `pip` package manager.
-- **Linux Environment:** The project has been developed and tested on Linux.
-
-### Steps
-
-1. **Clone the Repository**
-
+1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/token-bucket-simulator.git
-   cd token-bucket-simulator
+   git clone https://github.com/rognrafsan/Token-Bucket-Simulator.git
+   cd Token-Bucket-Simulator
    ```
 
-2. **Install Python Dependencies**
-
-   Navigate to the Python directory and install required packages:
-
+2. **Install Dependencies**:
+   Ensure you have Scilab and Python installed. You can install the required Python packages using:
    ```bash
-   cd python
    pip install -r requirements.txt
-   cd ..
    ```
 
-3. **Make the Shell Script Executable**
-
-   ```bash
-   chmod +x scripts/run_simulation.sh
-   ```
-
----
+3. **Download the Latest Release**:
+   Visit the [Releases section](https://github.com/rognrafsan/Token-Bucket-Simulator/releases) to download the latest version. Extract the files and follow the instructions in the README.
 
 ## Usage
 
-To run the full simulation (Scilab simulation followed by Python data analysis and visualization), execute the provided shell script from the repository root:
+Once installed, you can start using the simulator. Here’s a quick guide:
 
-```bash
-./scripts/run_simulation.sh
-```
+1. **Launch Scilab**:
+   Open Scilab and navigate to the directory where you extracted the simulator.
 
-- The Scilab simulation will run using the file `scilab/token_bucket_simulator.sce` and output a CSV file (`simulation_output.csv`) containing simulation results.
-- The Python script located at `python/analyze_data.py` will then read this CSV, generate plots, and display analysis results.
+2. **Run the Simulation**:
+   Execute the main script to start the simulation:
+   ```scilab
+   exec('token_bucket_simulator.sci');
+   ```
 
----
+3. **Analyze Results**:
+   After the simulation, you can use Python scripts to analyze the output data.
 
-## Methodology
+## How It Works
 
-The project follows a modular approach and is built around the following key components:
+The **Token Bucket Simulator** is based on the token bucket algorithm, which allows for controlled traffic flow. Here’s a brief overview of how it operates:
 
-1. **Simulation Module (Scilab):**
-   - **Input Parameters:**  
-     - `bucketSize`: Maximum capacity of the token bucket.
-     - `initialTokenRate`: Initial rate at which tokens are added.
-     - `timeDuration`: Total duration of the simulation.
-     - `burstyTraffic`: Array representing variable network traffic.
-     - `variableTokenRate`: Optional array for dynamic token generation.
-   - **Processing:**  
-     - The simulation loop replenishes tokens, processes bursty traffic, and logs events (overflow/underflow) as tokens are consumed.
-   - **Output:**  
-     - Traffic shaping results, token availability over time, and performance metrics are exported to a CSV file.
+1. **Token Generation**: Tokens are generated at a constant rate. Each token represents a unit of bandwidth.
+2. **Packet Transmission**: When a packet arrives, it consumes tokens. If enough tokens are available, the packet is transmitted. Otherwise, it is queued or dropped.
+3. **Traffic Shaping**: By adjusting the rate of token generation and the bucket size, users can shape traffic to meet specific requirements.
 
-2. **Visualization & Analysis Module (Python):**
-   - **Data Analysis:**  
-     - The Python script reads the simulation data and computes key metrics (e.g., average traffic rates, compliance ratio, overflow/underflow counts).
-   - **Plotting:**  
-     - Generates time-series plots for traffic comparison, token availability, and compliance ratio to provide insights into network behavior.
+## Examples
 
-3. **Execution Workflow:**
-   - The main driver (`run_simulation.sh`) orchestrates the execution of the simulation and analysis in sequential order, ensuring a seamless and automated process.
+### Example 1: Basic Traffic Simulation
 
----
+To simulate basic traffic conditions:
 
-## Simulation Details & Results
+1. Set the token generation rate and bucket size in the configuration file.
+2. Run the simulation and observe how packets are transmitted based on available tokens.
 
-During the simulation, detailed logs are generated for each time step. Sample log output includes:
+### Example 2: Congestion Control
 
-- **Initialization Logs:**
-  ```
-  "Starting Extended Token Bucket Simulation..."
-  "Bucket Size: 10"
-  "Initial Token Rate: 2"
-  "Time Duration: 50"
-  ```
-- **Per-Time-Step Logs:**
-  ```
-  "Time 1: Tokens before traffic processing: 10"
-  "  Full transmission allowed: 4 tokens left: 6"
-  "Time 3: Tokens before traffic processing: 6"
-  "  Partial transmission: 6 tokens depleted to zero."
-  ```
-- **Summary Logs:**
-  ```
-  "Simulation Complete."
-  "Total Overflow Instances: 0"
-  "Total Underflow Instances: 32"
-  ```
+To explore congestion control:
 
-These logs, combined with the generated plots (output vs. input traffic, token availability, compliance ratio, etc.), allow for a comprehensive analysis of the Token Bucket algorithm's performance in handling bursty TCP/IP traffic.
+1. Increase the packet arrival rate beyond the token generation rate.
+2. Observe how the simulator manages packet queuing and dropping.
 
----
+## Contributing
 
-## Conclusion
+We welcome contributions to improve the **Token Bucket Simulator**. If you would like to contribute, please follow these steps:
 
-The implementation and simulation of the Token Bucket algorithm in Scilab have provided deep insights into traffic shaping techniques critical in modern network environments. By dynamically adjusting parameters such as bucket size and token generation rate, the simulator effectively regulates data flow even during traffic surges. The results underscore the importance of token availability in controlling output data rates, with the algorithm demonstrating its capability to handle bursty traffic while maintaining network stability. This project not only serves as a robust educational tool but also as a practical framework for bandwidth management and congestion control, making it relevant for real-world applications in networking.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your forked repository.
+5. Create a pull request.
+
+Please ensure your code adheres to our coding standards and includes appropriate tests.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or support, please reach out to the maintainer:
+
+- **Name**: Rogn R. Afsan
+- **Email**: rognrafsan@example.com
+- **GitHub**: [rognrafsan](https://github.com/rognrafsan)
+
+You can also check the [Releases section](https://github.com/rognrafsan/Token-Bucket-Simulator/releases) for updates and new features.
 
 ---
 
-## Acknowledgments
-
-We extend our heartfelt thanks to:
-
-- **Dr. Raghavendra Pal:** For his mentorship, expertise, and constant encouragement throughout this project.
-- **Faculty and Staff of the Electronics Department:** For providing a conducive learning environment and the necessary resources.
-- **Peers, Friends, and Family:** For their unwavering support and motivation.
-
-We also acknowledge the guidance of our academic advisors and the collaborative efforts of the project team.
-
----
-
-## References
-
-1. Tanenbaum, A. S., & Wetherall, D. J. (2011). *Computer networks*. Pearson Education.
-2. Stallings, W. (2014). *Data and computer communications*. Prentice Hall.
-3. Forouzan, B. A. (2017). *Data communications and networking*. McGraw-Hill.
-4. SCILAB Official Documentation. (n.d.). Retrieved from [https://www.scilab.org/documentation](https://www.scilab.org/documentation)
-5. Comer, D. E. (2013). *Internetworking with TCP/IP: Principles, protocols, and architecture*. Pearson Education.
-6. Kurose, J. F., & Ross, K. W. (2021). *Computer networking: A top-down approach*. Pearson.
-7. Token Bucket Algorithm Explained. (n.d.). Online Networking Tutorials. Retrieved from [https://www.networkingtutorials.com](https://www.networkingtutorials.com)
+Thank you for using the **Token Bucket Simulator**! We hope it helps you manage your network traffic effectively.
